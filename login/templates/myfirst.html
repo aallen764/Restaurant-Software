@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+
+    <section class="container-fluid">
+        <div class="row">
+            <!--Actual Nav Bar-->
+            <nav class="navbar navbar-expand-lg navbar-dark custom-navbar w-100 p-3" id="line">
+            <a class="navbar-brand mx-2" href="#">RESTAURANT NAME HERE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                      <li class="nav-item">
+                          <a class="nav-link mx-2" href="shop.html">Recommendations</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link mx-2" href="new.html">Login</a>
+                      </li>
+                      
+                    </ul>
+  
+                    
+                  </div>
+  
+              
+  
+              </nav>
+          </div>
+      </section>
+
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="card d-flex flex-column justify-content-center" style="width: 30rem; height: 40rem">
+            <h5 class="card-title mx-3 mt-5 mb-1">SIGN IN</h5>
+            <hr>
+            <div class="card-body d-flex flex-column align-items-center">
+              
+              <input
+              type="email"
+              class="form-control"
+              id="email"
+              required
+              placeholder="Email or mobile number"
+                />
+
+            <br>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              required
+              placeholder="Password"
+                />
+            
+                <br>
+                <button id="signIn"> Sign in</button>
+
+            </div>
+          </div>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>
+
+<style>
+    body{
+        background-color: #7F5739;
+    }
+
+    #signIn{
+        background-color: #7F5739;
+        width: 400px;
+        margin: 0 auto;  
+        height: 50px;
+        border-radius: 5px;
+        color: white;
+    }
+
+    .card{
+        border-radius: 20px;
+    }
+
+    #email, #password{
+        width: 400px;
+        border-color: black;
+        height: 50px;
+    }
+
+    h5{
+        font-size: 25px;
+    }
+</style>
