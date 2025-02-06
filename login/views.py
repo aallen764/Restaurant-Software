@@ -4,5 +4,6 @@ from django.template import loader
 
 # Create your views here.
 def login(request):
-    template = loader.get_template('myfirst.html')
-    return HttpResponse(template.render())
+    template_data = {}
+    template_data['title'] = 'BiteFinder'
+    return render(request, 'login/myfirst.html', {'template_data': template_data})

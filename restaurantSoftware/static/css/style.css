@@ -1,0 +1,63 @@
+body{
+    background-color: #eae1da;
+}
+
+.brown {
+    color: #7F5739;
+}
+
+.custom-navbar {
+    background-color: transparent !important;
+    box-shadow: none;
+}
+
+/* this if for the login page */
+/* the sign in page button */
+#signIn{
+    background-color: #7F5739;
+    width: 400px;
+    margin: 0 auto;  
+    height: 50px;
+    border-radius: 5px;
+    color: white;
+}
+
+.card{
+    border-radius: 20px;
+}
+
+#email, #password{
+    width: 400px;
+    border-color: black;
+    height: 50px;
+}
+
+.card-title{
+    font-size: 25px;
+}
+
+/* Home page styling */
+div .bg-index{
+    background: url("/static/images/homebg.jpeg") no-repeat fixed;
+    background-size: cover;      
+    background-position: center; 
+    background-repeat: no-repeat; 
+    height: 100vh;               
+    width: 100%;                 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    z-index: -1;
+  }
+
+  .btn-primary {
+    background-color:#7F5739;
+    border-color: #7F5739;
+  }
+
+  .btn-primary:hover {
+    background-color: white;
+    border-color: #7F5739;
+    color: #7F5739;
+  }
