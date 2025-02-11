@@ -17,17 +17,17 @@
         <div class="row">
             <!--Actual Nav Bar-->
             <nav class="navbar navbar-expand-lg navbar-dark custom-navbar w-100 p-3" id="line">
-            <a class="navbar-brand mx-2 brown" href="#">BiteFinder</a>
+            <a class="navbar-brand mx-2 brown" href="{% url 'home.index' %}">BiteFinder</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                       <li class="nav-item">
-                        <a class="nav-link mx-2 brown" href="shop.html">Recommendations</a>
+                        <a class="nav-link mx-2 brown" href="{% url 'about.index' %}">About</a>
                       </li>
                       <li class="nav-item">
-                        <a class="btn btn-primary" href="#" role="button">Login</a>
+                        <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
                       </li>
                       
                     </ul>
