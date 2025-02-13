@@ -61,3 +61,9 @@ div .bg-index{
     border-color: #7F5739;
     color: #7F5739;
   }
+
+  /* this is for the about page */
+  .aboutImage {
+    width: 100%;
+    height: auto;
+  }
