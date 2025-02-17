@@ -11,6 +11,10 @@ body{
     box-shadow: none;
 }
 
+.ms-footer {
+    z-index: 2;
+}
+
 /* this if for the login page */
 /* the sign in page button */
 #signIn{
@@ -61,3 +65,38 @@ div .bg-index{
     border-color: #7F5739;
     color: #7F5739;
   }
+
+  /* This is for my search page */
+  .searchImg {
+    height: 200vh;
+    width: 50%;
+    object-fit: cover;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0; 
+    z-index: -2; 
+  }
+
+  .form-check-input {
+    border-color: #7F5739; /* Brown border color when unchecked */
+}
+
+  .form-check-input:checked {
+    background-color: #7F5739; /* Brown color */
+    border-color: #7F5739; /* Brown border color */
+}
+
+    .form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(139, 69, 19, 0.5); /* Optional: adding a glow effect when focused */
+}
+
+.form-control {
+    border-color: #7F5739;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(139, 69, 19, 0.5);
+    border-color: #7F5739;
+}
