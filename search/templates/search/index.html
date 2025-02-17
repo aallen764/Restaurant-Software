@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid p-0 mt-0 mb-5 pb-5"> 
+    <div class="row no-gutters" style="height: 100h;"> 
+      <div class="col-7 d-flex justify-content-center"> 
+        <div class="p-3 pt-0 w-75">
+            <form class="d-flex flex-column align-items-center mt-5">
+                <div class="d-flex w-100 justify-content-center mb-3">
+                    <input class="form-control me-2 w-75" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+                <div class="d-flex justify-content-center mb-3"> 
+                    <div class="form-check me-3">
+                        <input type="checkbox" class="form-check-input" id="nearby">
+                        <label class="form-check-label" for="nearby">Nearby</label>
+                    </div>
+                    <div class="form-check me-3">
+                        <input type="checkbox" class="form-check-input" id="open">
+                        <label class="form-check-label" for="open">Open Now</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="Bar">
+                        <label class="form-check-label" for="Bar">Bar</label>
+                    </div>
+                </div>
+            </form>
+
+            <h1 class="display-6 mt-4 justify-content-center d-flex">Best Restaurants Near You</h1>
+
+            <!-- Row for cards -->
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4"> 
+                <!-- First Card -->
+                <div class="col">
+                  <div class="card w-100">
+                        <img src="/static/images/cardPlaceholder.jpg" class="card-img-top" alt="card image" style="width: 100%; height: auto; max-height: 125px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Title</h5>
+                            <p class="card-text text-secondary">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Second Card -->
+                <div class="col">
+                  <div class="card w-100">
+                        <img src="/static/images/cardPlaceholder.jpg" class="card-img-top" alt="card image" style="width: 100%; height: auto; max-height: 125px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Title</h5>
+                            <p class="card-text text-secondary">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add more cards as needed -->
+                <div class="col">
+                  <div class="card w-100">
+                        <img src="/static/images/cardPlaceholder.jpg" class="card-img-top" alt="card image" style="width: 100%; height: auto; max-height: 125px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Title</h5>
+                            <p class="card-text text-secondary">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                  <div class="card w-100">
+                        <img src="/static/images/cardPlaceholder.jpg" class="card-img-top" alt="card image" style="width: 100%; height: auto; max-height: 125px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Title</h5>
+                            <p class="card-text text-secondary">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+      </div>
+      <div class="col-5 p-0">
+        <div class="p-0 m-0">
+          <img src="/static/images/searchImage.jpg" alt="search image" class="img-fluid w-100 h-100 object-fit-cover mt-5" style="z-index: 1 !important;"> 
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock content %}

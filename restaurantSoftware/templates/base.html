@@ -27,6 +27,9 @@
                         <a class="nav-link mx-2 brown" href="{% url 'about.index' %}">About</a>
                       </li>
                       <li class="nav-item">
+                        <a class="nav-link mx-2 brown" href="{% url 'search.index' %}">Search</a>
+                      </li>
+                      <li class="nav-item">
                         <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
                       </li>
                       
@@ -48,7 +51,7 @@
     </div>
 
     <!-- Footer -->
-    <section class="p-3 ms-footer d-none d-md-block">
+    <section class="p-3 ms-footer d-none d-md-block bg-light">
       <div class="container">
         <div class="row mt-3 text-white">
           <div class="col-md-6 col-lg-6 col-xl-6 mx-auto mb-4">
@@ -59,14 +62,16 @@
           <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
             <b class="brown">LINKS</b>
             <hr class="brown"/>
-            <p class="brown"><a class="nav-link" href="#">About</a></p>
+            <p class="brown"><a class="nav-link" href="{% url 'about.index' %}">About</a></p>
+            <p class="brown"><a href="{% url 'search.index' %}" class="nav-link">Search</a></p>
+            <p class="brown"><a class="nav-link" href="{% url 'login' %}">Log In</a></p>
           </div>
           <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
             <b class="brown">CONTACT</b>
             <hr class="brown"/>
             <p class="brown"><i class="fas fa-home me-2 brown"></i> Lakeland, Florida </p>
             <p class="brown"><i class="fas fa-envelope me-2 brown"></i> bitefinder@gmail.com </p>
-            <p class="brown"><i class="fas fa-phone me-2 brown"></i> 911 </p>
+            <p class="brown"><i class="fas fa-phone me-2 brown"></i> 123.456.7890 </p>
           </div>
         </div>
       </div>
