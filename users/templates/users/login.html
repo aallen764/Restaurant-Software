@@ -1,29 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{% block title %}{% endblock %}</title>
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-</head>
-<body>
+{% extends 'base.html' %}
 
+{% block title %}Login{% endblock %}
+
+{% block content %}
     <section class="container-fluid">
         <div class="row">
-            <!--Actual Nav Bar-->
+            <!-- Actual Nav Bar -->
             <nav class="navbar navbar-expand-lg navbar-dark custom-navbar w-100 p-3" id="line">
-            <a class="navbar-brand mx-2" href="#">RESTAURANT NAME HERE</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                      <li class="nav-item">
-                          <a class="nav-link mx-2" href="shop.html">Recommendations</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link mx-2" href="new.html">Login</a>
-                      </li>
+                        <li class="nav-item">
+                        </li>
+                        <li class="nav-item">
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -35,7 +27,6 @@
             <h5 class="card-title mx-3 mt-5 mb-1">SIGN IN</h5>
             <hr>
             <div class="card-body d-flex flex-column align-items-center">
-                
                 <!-- Added form here to send POST request -->
                 <form method="POST" action="{% url 'users:login' %}">
                     {% csrf_token %}  <!-- Added CSRF Token for security -->
@@ -45,9 +36,9 @@
                         type="text"
                         class="form-control"
                         name="username"  
-                        id="username"
+                        id="email"
                         required
-                        placeholder="Username"
+                        placeholder="Email or mobile number"
                     />
 
                     <br>
@@ -70,11 +61,8 @@
 
             </div>
         </div>
-
-{% block content %}
+    </div>
 {% endblock %}
-</body>
-</html>
 
 <style>
     body{
@@ -100,7 +88,8 @@
         height: 50px;
     }
 
-    h5{
+    h5.card-title{
         font-size: 25px;
+        color: #7F5739 !important;
     }
 </style>
