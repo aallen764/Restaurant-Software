@@ -43,11 +43,8 @@ INSTALLED_APPS = [
     'home',
     'users',
     'about',
-<<<<<<< HEAD
-    'search'
-=======
+    'search',
     'signUp',
->>>>>>> feature/signUp
 ]
 
 MIDDLEWARE = [
