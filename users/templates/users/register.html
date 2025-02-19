@@ -1,12 +1,77 @@
-<!DOCTYPE html>
-<body>
-    <form method="POST">
-        {% csrf_token %}
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Register</button>
-    </form>
-    
-</body>
+{% extends "base.html" %}
 
-</html>
+{% block content %}
+    <style>
+        .error {
+            color: red;
+        }
+
+        .required {
+            color: red;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        /* Centering the form */
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Ensures it takes up full height */
+        }
+
+        .form-wrapper {
+            width: 100%;
+            max-width: 400px; /* Limits the form's width */
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: white; /* Sets the background color to white */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        button[type="submit"] {
+            margin-top: 15px;
+        }
+    </style>
+
+    <div class="form-container">
+        <div class="form-wrapper">
+            <h2>Register</h2>
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="id_username">Username <span class="required">*</span></label>
+                    {{ user_form.username }}
+                    {% for error in user_form.username.errors %}
+                        <div class="error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password">Password <span class="required">*</span></label>
+                    {{ user_form.password }}
+                    {% for error in user_form.password.errors %}
+                        <div class="error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_zipcode">Zip Code <span class="required">*</span></label>
+                    {{ profile_form.zipcode }}
+                    {% for error in profile_form.zipcode.errors %}
+                        <div class="error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+            <p><span class="required">*</span> indicates required field</p>
+        </div>
+    </div>
+
+{% endblock %}

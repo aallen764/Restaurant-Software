@@ -5,6 +5,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.views import generic
 from django.template import loader
+from .models import user_Profile
+from .forms import registration_Form, profile_Form
 
 # Create your views here
 
@@ -22,18 +24,26 @@ def LoginView(request):
 
 def user_Register(request):
     if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
-        if User.objects.filter(username = username).exists():
-            messages.error(request, "Username already exists.")
-        else:
-            user = User.objects.create_user(username = username, password = password)
+        user_form = registration_Form(request.POST)
+        profile_form = profile_Form(request.POST)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save(commit=False)
+            user.set_password(user_form.cleaned_data["password"]) # hides inputted password
             user.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user # connects profile object to user object
+            profile.save()
+
             login(request, user)
-            messages.success(request, "LOGIN WAS SUCCESSFUL")
-            return redirect('users:test')
+            messages.success(request, "Registration successful!")
+            return redirect("users:test")
+    else:
+        user_form = registration_Form()
+        profile_form = profile_Form()
     
-    return render(request, "users/register.html")
+    return render(request, "users/register.html", {"user_form": user_form, "profile_form": profile_form})
 
 def user_Login(request):
     if request.method == "POST":
