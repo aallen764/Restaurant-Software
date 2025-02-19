@@ -23,5 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('about/', include('about.urls')),
+<<<<<<< HEAD
     path('search/', include('search.urls')),
+=======
+    path('signUp/', include('signUp.urls')),
+>>>>>>> feature/signUp
 ]

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+<body>
+     
+<section class="container-fluid">
+    <div class="row">
+      <div id="picture">
+        <div id="overlay">
+            <div class="d-flex flex-column justify-content-center align-items-center" height: 100vh;>
+                <div class="card d-flex flex-column justify-content-center " style="width: 30rem; height: auto;">
+                  <div class="card-body d-flex flex-column align-items-center mb-5 rounded-0">
+                    <input
+                      type="text"
+                      class="form-control mb-3"
+                      id="fname"
+                      required
+                      placeholder="First Name"
+                    />
+                    <input
+                      type="name"
+                      class="form-control mb-3"
+                      id="lname"
+                      required
+                      placeholder="Last Name"
+                    />
+                    <input
+                      type="email"
+                      class="form-control mb-3"
+                      id="email"
+                      required
+                      placeholder="Email"
+                    />
+                    <input
+                      type="number"
+                      class="form-control mb-3"
+                      id="number"
+                      required
+                      placeholder="Mobile Number"
+                    />
+                    <input
+                      type="password"
+                      class="form-control mb-3"
+                      id="password"
+                      required
+                      placeholder="Password"
+                    />
+                    
+                    
+                    <button id="signIn" class="btn btn-primary">Sign in</button>
+                  </div>
+                </div>
+              </div>
+              
+      </div>
+    </div>
+  </section>
+</body>
+</html>
+{% endblock content %}
