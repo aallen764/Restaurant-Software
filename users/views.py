@@ -14,13 +14,17 @@ def RegistrationView(request):
     if request.method == "POST":
         return user_Register(request)
     else:
-        return render(request, 'users/register.html')
+        template_data = {}
+        template_data['title'] = 'Register'
+        return render(request, 'users/register.html', {'template_data': template_data})
 
 def LoginView(request):
     if request.method == "POST":
         return user_Login(request)
     else:
-        return render(request, 'users/login.html')
+        template_data = {}
+        template_data['title'] = 'Login'
+        return render(request, 'users/login.html', {'template_data': template_data})
 
 def user_Register(request):
     if request.method == "POST":

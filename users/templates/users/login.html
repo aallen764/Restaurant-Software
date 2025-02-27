@@ -28,7 +28,7 @@
             <hr>
             <div class="card-body d-flex flex-column align-items-center">
                 <!-- Added form here to send POST request -->
-                <form method="POST" action="{% url 'users:login' %}">
+                <form method="POST" action="{% url 'users:userLogin' %}">
                     {% csrf_token %}  <!-- Added CSRF Token for security -->
                     
                     <!-- Changed input name to 'username' to match with the backend -->
