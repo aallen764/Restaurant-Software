@@ -33,7 +33,7 @@ def user_Register(request):
 
             login(request, user)
             messages.success(request, "Registration successful!")
-            return redirect("users:test")
+            return redirect("/login")
     else:
         user_form = registration_Form()
         profile_form = profile_Form()
