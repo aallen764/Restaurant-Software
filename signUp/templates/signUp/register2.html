@@ -2,87 +2,57 @@
 {% block content %}
 {% load static %}
 
-
 <section class="container-fluid">
     <div class="row">
-      <div id="picture">
-        <div id="overlay">
-            <div class="d-flex flex-column justify-content-center align-items-center" height: 100vh;>
-                <div class="card d-flex flex-column justify-content-center " style="width: 30rem; height: auto;">
-                  <div class="card-body d-flex flex-column align-items-center mb-5 rounded-0">
+        <div id="picture">
+            <div id="overlay">
+                <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+                    <div class="card d-flex flex-column justify-content-center" style="width: 30rem; height: auto;">
+                        <div class="card-body d-flex flex-column align-items-center mb-5 rounded-0">
+                            <div class="form-container">
+                                <div class="form-wrapper">
+                                    <h2>Register</h2>
+                                    <form method="POST">
+                                        {% csrf_token %}
 
-                    <div class="form-container">
-                        <div class="form-wrapper">
-                            <form method="POST">
-                                {% csrf_token %}
+                                        <!-- Username Field -->
+                                        <div class="mb-3">
+                                            <label for="id_username" class="form-label">Username</label>
+                                            <input type="text" name="username" id="id_username" class="form-control" required value="{{ user_form.username.value|default_if_none:'' }}">
+                                            {% for error in user_form.username.errors %}
+                                                <div class="alert alert-danger mt-1">{{ error }}</div>
+                                            {% endfor %}
+                                        </div>
 
-                                <div class="mb-3">
-                                    <label for="id_username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="id_username" aria-describedby="username" required placeholder="Username here">
-                                    {{ user_form.username }}
-                                    {% for error in user_form.username.errors %}
-                                        <div class="error">{{ error }}</div>
-                                    {% endfor %}
-                                  </div>
-                                
-                                <div class="mb-3">
-                                    <label for="id_password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="id_password" aria-describedby="password" required placeholder="Must be 6 characters">
+                                        <!-- Password Field -->
+                                        <div class="mb-3">
+                                            <label for="id_password" class="form-label">Password</label>
+                                            <input type="password" name="password" id="id_password" class="form-control" required>
+                                            {% for error in user_form.password.errors %}
+                                                <div class="alert alert-danger mt-1">{{ error }}</div>
+                                            {% endfor %}
+                                        </div>
+
+                                        <!-- Zip Code Field -->
+                                        <div class="mb-3">
+                                            <label for="id_zipcode" class="form-label">Zip Code</label>
+                                            <input type="text" name="zipcode" id="id_zipcode" class="form-control" required value="{{ profile_form.zipcode.value|default_if_none:'' }}">
+                                            {% for error in profile_form.zipcode.errors %}
+                                                <div class="alert alert-danger mt-1">{{ error }}</div>
+                                            {% endfor %}
+                                            <div id="zipcodeHelp" class="form-text">We'll never share your location with anyone else.</div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Register</button>
+                                    </form>
                                 </div>
-
-                                <div class="mb-3">
-                                    <label for="id_zipcode" class="form-label">Zip Code</label>
-                                    <input type="text" class="form-control" id="id_zipcode" aria-describedby="zipcode" required placeholder="5 characters">
-                                    <div id="zipcodeHelp" class="form-text">We'll never share your location with anyone else.</div>
-                                </div>
-                                
-                                <button type="submit" class="btn btn-primary">Register</button>
-
-                            </form>
-                        </div>
-                    </div>
-                    </div>
+                            </div>
+                        </div> <!-- End Card Body -->
+                    </div> <!-- End Card -->
                 </div>
             </div>
         </div>
     </div>
-    </div>
 </section>
-
-    <div class="form-container">
-        <div class="form-wrapper">
-            <h2>Register</h2>
-            <form method="POST">
-                {% csrf_token %}
-
-                <div class="form-group">
-                    <label for="id_username">Username <span class="required">*</span></label>
-                    {{ user_form.username }}
-                    {% for error in user_form.username.errors %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
-                </div>
-
-                <div class="form-group">
-                    <label for="id_password">Password <span class="required">*</span></label>
-                    {{ user_form.password }}
-                    {% for error in user_form.password.errors %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
-                </div>
-
-                <div class="form-group">
-                    <label for="id_zipcode">Zip Code <span class="required">*</span></label>
-                    {{ profile_form.zipcode }}
-                    {% for error in profile_form.zipcode.errors %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
-                </div>
-
-                <button type="submit" class="btn btn-primary">Register</button>
-            </form>
-            <p><span class="required">*</span> indicates required field</p>
-        </div>
-    </div>
 
 {% endblock %}
