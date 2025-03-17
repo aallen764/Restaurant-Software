@@ -23,6 +23,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         {% if user.is_authenticated %}
+                        <!--Navbar view for logged-in users-->
                             <li class = "nav-item">
                               <a class = "nav-link mx-2 brown" href = "{% url 'about.index' %}">About</a>
                             </li>
@@ -30,12 +31,19 @@
                               <a class = "nav-link mx-2 brown" href = "{% url 'search.index' %}">Search</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mx-2 brown" href="{% url 'login.index' %}">{{ user.username }}</a>
+                                <a class="nav-link mx-2 brown" href="{% url 'test' %}"><i class = "bi bi-person-circle"></i> {{ user.username }}</a>
                             </li>
                             <li class = "nav-item">
-                              <a class = "btn btn-primary" href = "{% url 'login.index' %}" role = "button">SignOut</a>
+                              <a class = "btn btn-primary" href = "{% url 'logout' %}" role = "button">SignOut</a>
                             </li>
                         {% else %}
+                        <!--Navbar view for signed-out users-->
+                            <li class = "nav-item">
+                              <a class = "nav-link mx-2 brown" href = "{% url 'about.index' %}">About</a>
+                            </li>
+                            <li class = "nav-item">
+                              <a class = "nav-link mx-2 brown" href = "{% url 'search.index' %}">Search</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="btn btn-primary" href="{% url 'login.index' %}" role="button">Login</a>
                             </li>
