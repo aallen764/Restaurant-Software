@@ -75,9 +75,16 @@
           <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
             <b class="brown">LINKS</b>
             <hr class="brown"/>
+            {% if not user.is_authenticated %}
+              <p class="brown"><a class="nav-link" href="{% url 'about.index' %}">About</a></p>
+              <p class="brown"><a href="{% url 'search.index' %}" class="nav-link">Search</a></p>
+              <p class="brown"><a href="{% url 'signUp' %}" class="nav-link">SignUp</a></p>
+              <p class="brown"><a class="nav-link" href="{% url 'login.index' %}">Log In</a></p>
+            {% else %}
             <p class="brown"><a class="nav-link" href="{% url 'about.index' %}">About</a></p>
             <p class="brown"><a href="{% url 'search.index' %}" class="nav-link">Search</a></p>
-            <p class="brown"><a class="nav-link" href="{% url 'login.index' %}">Log In</a></p>
+            <p class="brown"><a href="{% url 'test' %}" class="nav-link">Account</a></p>
+            {% endif %}
           </div>
           <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
             <b class="brown">CONTACT</b>
