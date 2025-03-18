@@ -27,5 +27,6 @@ urlpatterns = [
     path('search/', include('search.urls')),
     path('signUp/', include('signUp.urls')),
     path('login/', include('login.urls')),
-    path('login2/', include('users.urls'))
+    path('login2/', include('users.urls')),
+    path('map/', include('map.urls'))
 ]
