@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'about',
     'search',
     'signUp',
+    'map',
 ]
 
 MIDDLEWARE = [
@@ -115,6 +116,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
+
+GOOGLE_API_KEY = 'AIzaSyAREHr_JNo0KmsVoRgcKSU9t_vqk1mz0No'
 
 LANGUAGE_CODE = 'en-us'
 

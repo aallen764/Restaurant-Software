@@ -9,13 +9,16 @@ from .models import user_Profile
 from .forms import registration_Form, profile_Form
 
 # Create your views here.
-def signUp(request):
-    if request.method == "POST":
-        return user_Register(request)
-    else:
-        template_data = {}
-        template_data['title'] = 'BiteFinder'
-        return render(request, 'signUp/register2.html', {'template_data': template_data})
+def signUp(request): # view for sign_up
+    if not request.user.is_authenticated: # if user is NOT logged in, allow them to continue with sign-up view/process
+        if request.method == "POST":
+            return user_Register(request)
+        else:
+            template_data = {}
+            template_data['title'] = 'BiteFinder'
+            return render(request, 'signUp/register2.html', {'template_data': template_data})
+    else: # if user is NOT logged in, they can't sign up, so redirect them back to homepage
+        return redirect('/')
 
 def user_Register(request):
     if request.method == "POST":
@@ -33,7 +36,7 @@ def user_Register(request):
 
             login(request, user)
             messages.success(request, "Registration successful!")
-            return redirect("/login")
+            return redirect("/")
     else:
         user_form = registration_Form()
         profile_form = profile_Form()
