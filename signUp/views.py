@@ -24,7 +24,6 @@ def user_Register(request):
     if request.method == "POST":
         user_form = registration_Form(request.POST)
         profile_form = profile_Form(request.POST)
-
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save(commit=False)
             user.set_password(user_form.cleaned_data["password"]) # hides inputted password
@@ -35,7 +34,6 @@ def user_Register(request):
             profile.save()
 
             login(request, user)
-            messages.success(request, "Registration successful!")
             return redirect("/")
     else:
         user_form = registration_Form()
