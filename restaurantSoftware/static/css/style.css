@@ -162,3 +162,8 @@ input.form-control {
     align-items: center;      /* Centers vertically */
     height: 100vh;            /* Makes sure the container takes full viewport height */
 }
+
+/* Account page styling */
+.dark-brown {
+    color:#5f3d24;
+}
