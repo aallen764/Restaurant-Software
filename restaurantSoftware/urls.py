@@ -28,5 +28,6 @@ urlpatterns = [
     path('signUp/', include('signUp.urls')),
     path('login/', include('login.urls')),
     path('login2/', include('users.urls')),
-    path('map/', include('map.urls'))
+    path('map/', include('map.urls')),
+    path('account/', include('accountPage.urls'))
 ]
