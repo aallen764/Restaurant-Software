@@ -35,7 +35,6 @@ def user_Register(request):
             profile.save()
 
             login(request, user)
-            messages.success(request, "Registration successful!")
             return redirect("/")
     else:
         user_form = registration_Form()
