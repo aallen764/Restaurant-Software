@@ -42,6 +42,15 @@
                                             {% endfor %}
                                         </div>
 
+                                        <!-- Phone Number Field -->
+                                        <div class="mb=3">
+                                            <label for ="id_phone" class="form-label">Phone Number</label>
+                                            <input type="text" name="phone_number" id="id_phone_number" class="form-control" required value="{{ profile_form.phone_number.value|default_if_none:''}}">
+                                            {% for error in profile_form.phone_number.errors %}
+                                                <div class="alert alert-danger mt-1">{{ error }}</div>
+                                            {% endfor %}
+                                        </div>
+
                                         <!-- Zip Code Field -->
                                         <div class="mb-3">
                                             <label for="id_zipcode" class="form-label">Zip Code</label>
