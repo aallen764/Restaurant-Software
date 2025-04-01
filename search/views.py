@@ -2,11 +2,30 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 import requests
+from django.contrib.auth.decorators import login_required
+from signUp.models import user_Profile
 
 # Create your views here.
 def index(request):
     template_data = {}
     template_data['title'] = 'Restaurant Search'
+
+    # pulling user to get their zipcode
+    user = request.user
+
+    try:
+        user_profile = user.user_profile  # Accessing the user_profile linked to the user
+        zip_code = user_profile.zip_code
+    except user_Profile.DoesNotExist:
+        return HttpResponse("User profile not found.", status=404)
+    
+    city = get_city_from_zip(zip_code)
+    print(city)
+
+    businesses = findRestaurants(city)
+    for business in businesses:
+        print(business['name'])
+
     return render(request, 'search/index.html', {'template_data': template_data})
 
 
@@ -19,9 +38,6 @@ def get_city_from_zip(zip_code):
     data = response.json()
     return data.get('city', 'City not found')
 
-zip_code = '33801'
-city = get_city_from_zip(zip_code)
-print(city)
 
 def findRestaurants(city):
     API_KEY = '8IsAViZ9EV4sgczPyama_sNAMtRagiWIQk1nU6QdQA6QJ5iR3L9Exd-fBXkOKVQHQW93gySAvGrNyzTBz0C7UA0lX1Z__z_PLLkVug3hb2vSrH4VguGtHhC9T1HTZ3Yx'
@@ -44,10 +60,3 @@ def findRestaurants(city):
         print(f"Error: {response.status_code} - {response.text}")
         return None
     
-businesses = findRestaurants(city)
-if businesses is None:
-    print("No businesses found.")
-else:
-    for business in businesses:
-        print(business['name'])
-
