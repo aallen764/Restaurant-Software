@@ -45,6 +45,9 @@ def findRestaurants(city):
         return None
     
 businesses = findRestaurants(city)
-for business in businesses:
-    print(business['name'])
+if businesses is None:
+    print("No businesses found.")
+else:
+    for business in businesses:
+        print(business['name'])
 

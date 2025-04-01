@@ -21,21 +21,21 @@ class registration_Form(forms.ModelForm):
         return username
 
 class profile_Form(forms.ModelForm):
-    zipcode = forms.CharField(max_length = 10, required = True)
-    email_adress = forms.CharField(max_length = 256, required = True)
+    zip_code = forms.CharField(max_length = 10, required = True)
+    email_address = forms.CharField(max_length = 256, required = True)
 
     class Meta:
         model = user_Profile
-        fields = ['zipcode', 'phone_number', 'email_address']
+        fields = ['zip_code', 'phone_number', 'email_address']
 
-    def clean_zipcode(self): # checks if zipcode is valid
-        zip_code = self.cleaned_data.get('zipcode')
+    def clean_zip_code(self): # checks if zip_code is valid
+        zip_code = self.cleaned_data.get('zip_code')
         if not re.fullmatch(r'\d{5,10}', zip_code): # makes sure zipcode is at least 5 digits long, shorter than 10
             raise forms.ValidationError("Must be atleast 5 digits long (numbers only).")
         return zip_code
         
-    def clean_email(self): # checks if user's inputted email is valid
+    def clean_email_address(self): # checks if user's inputted email is valid
         email_address = self.cleaned_data.get('email_address')
-        #if User.objects.filter(email_address = email_address).exists():
-            #raise forms.ValidationError("this email is already in use.\nPlease choose another or login with email.")
+        if user_Profile.objects.filter(email_address = email_address).exists():
+            raise forms.ValidationError("this email is already in use. Please choose another or login with email.")
         return email_address

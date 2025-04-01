@@ -9,34 +9,33 @@ from .models import user_Profile
 from .forms import registration_Form, profile_Form
 
 # Create your views here.
-def signUp(request): # view for sign_up
-    if not request.user.is_authenticated: # if user is NOT logged in, allow them to continue with sign-up view/process
-        if request.method == "POST":
-            return user_Register(request)
-        else:
-            template_data = {}
-            template_data['title'] = 'BiteFinder'
-            return render(request, 'signUp/register2.html', {'template_data': template_data})
-    else: # if user is NOT logged in, they can't sign up, so redirect them back to homepage
+def signUp(request):
+    if request.user.is_authenticated:
         return redirect('/')
 
-def user_Register(request):
+    user_form = registration_Form()
+    profile_form = profile_Form()
+
     if request.method == "POST":
         user_form = registration_Form(request.POST)
         profile_form = profile_Form(request.POST)
+
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save(commit=False)
-            user.set_password(user_form.cleaned_data["password"]) # hides inputted password
+            user.set_password(user_form.cleaned_data["password"])
             user.save()
 
-            profile = profile_form.save(commit=False)
-            profile.user = user # connects profile object to user object
+            # creates profile automatically with signal call
+            profile = user.user_profile  # creates reference variable for the newly created profile
+            profile.email_address = profile_form.cleaned_data["email_address"]
+            profile.zip_code = profile_form.cleaned_data["zip_code"]
+            profile.phone_number = profile_form.cleaned_data["phone_number"]
             profile.save()
 
             login(request, user)
             return redirect("/")
-    else:
-        user_form = registration_Form()
-        profile_form = profile_Form()
-    
-    return render(request, 'signUp/register2.html', {"user_form": user_form, "profile_form": profile_form})
+
+    return render(request, 'signUp/register2.html', {
+        "user_form": user_form, 
+        "profile_form": profile_form
+    })
