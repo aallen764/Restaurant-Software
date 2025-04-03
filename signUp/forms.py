@@ -18,24 +18,31 @@ class registration_Form(forms.ModelForm):
         username = self.cleaned_data.get('username')
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError("This username is already taken. Please choose another.") # outputs error if inputted username already exists
-        
         return username
 
 class profile_Form(forms.ModelForm):
-    zipcode = forms.CharField(max_length = 10, required = True)
+    zip_code = forms.CharField(max_length = 10, required = True)
+    email_address = forms.CharField(max_length = 256, required = True)
+    phone_number = forms.CharField(max_length = 11, required = False)
 
     class Meta:
         model = user_Profile
-        fields = ['zipcode', 'phone_number']
+        fields = ['zip_code', 'phone_number', 'email_address']
 
-    def clean_zipcode(self): # checks if zipcode is valid
-        zip_code = self.cleaned_data.get('zipcode')
+    def clean_zip_code(self): # checks if zip_code is valid
+        zip_code = self.cleaned_data.get('zip_code')
         if not re.fullmatch(r'\d{5,10}', zip_code): # makes sure zipcode is at least 5 digits long, shorter than 10
             raise forms.ValidationError("Must be atleast 5 digits long (numbers only).")
         return zip_code
+        
+    def clean_email_address(self): # checks if user's inputted email is valid
+        email_address = self.cleaned_data.get('email_address')
+        if user_Profile.objects.filter(email_address = email_address).exists():
+            raise forms.ValidationError("this email is already in use.")
+        return email_address
     
-    def clean_phoneNumber(self): # checks if user's inputted phone number is valid
+    def clean_phone_number(self): # checks if user's inputted phone # is valid (not a duplicate)
         phone_number = self.cleaned_data.get('phone_number')
-        if not re.fullmatch(r'\d{10}', phone_number): # phone number must be 10 digits long
-            raise forms.ValidationError("Must be at least 10 digits long (numbers only).")
+        if user_Profile.objects.filter(phone_number = phone_number).exists():
+            raise forms.ValidationError("This phone number is already in use.")
         return phone_number
