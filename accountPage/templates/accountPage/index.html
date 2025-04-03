@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="m-3 mb-0 pb-0">
+    <div class="d-flex align-items-center">
+        <i class="bi bi-person-circle brown" style="font-size: 10rem;"></i>
+        <span style="font-size: 3rem; margin-left: 10px;" class="display-4">Welcome, {{ user.username }}</span>
+    </div>
+</div>
+
+<div class="display-5 mb-5 pb-5" style="font-size: 2rem; padding-left: 190px;">
+    <p>Username: {{ user.username }} <button type="button" class="btn btn-dark">Change Username</button></p>
+    <p>Zipcode: 33801 <button type="button" class="btn btn-dark">Change Zipcode</button></p>
+    <p>Email: testemail@gmail.com <button type="button" class="btn btn-dark">Change Email</button></p>
+</div>
+
+{% endblock content %}
