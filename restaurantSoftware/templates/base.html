@@ -31,6 +31,9 @@
                             <li class = "nav-item">
                               <a class = "nav-link mx-2 brown" href = "{% url 'search.index' %}">Search</a>
                             </li>
+                            <li class = "nav-item">
+                              <a class = "nav-link mx-2 brown" href = "{% url 'map.index' %}">Map</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link mx-2 brown" href="{% url 'account.index' %}"><i class = "bi bi-person-circle"></i> {{ user.username }}</a>
                             </li>
@@ -41,12 +44,6 @@
                         <!--Navbar view for signed-out users-->
                             <li class = "nav-item">
                               <a class = "nav-link mx-2 brown" href = "{% url 'about.index' %}">About</a>
-                            </li>
-                            <li class = "nav-item">
-                              <a class = "nav-link mx-2 brown" href = "{% url 'search.index' %}">Search</a>
-                            </li>
-                            <li class = "nav-item">
-                              <a class = "nav-link mx-2 brown" href = "{% url 'map.index' %}">Map</a>
                             </li>
                             <li class = "nav-item">
                             <a class = "nav-link mx-2 brown" href = "{% url 'signUp' %}">SignUp</a>
