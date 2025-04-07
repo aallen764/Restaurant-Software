@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'search',
     'signUp',
     'map',
-    'accountPage'
+    'accountPage',
+    'results'
 ]
 
 MIDDLEWARE = [
