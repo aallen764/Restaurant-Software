@@ -13,7 +13,12 @@ def index(request):
     else:
         return redirect('/')
 
-def change_Username(request):
-    if request.method == "POST":
-        user = request.user  # grab current user
-        current_Username = request.user.get_username() # grab username of current user
+def index2(request):
+    if not request.user.is_authenticated:
+        return redirect('/')
+    
+    # call the signup forms for user & profile form to check if new user information is valid (clean)
+    # if input field is EMPTY -> set equal to default value
+    #
+    # change to a ONE-PAGE system - -> add bootstrap image (pencil) next to each user info field
+    # clickable button creates text field and calls signup clean-up forms to check validity
