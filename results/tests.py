@@ -1,3 +1,28 @@
 from django.test import TestCase
+from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 # Create your tests here.
+class ResultsTests(TestCase):
+
+    def test_loggedIn(self):
+        # Testing logging in before we do the next part
+        self.user = get_user_model().objects.create_user(
+            username='testuser', password='testpassword'
+        )
+
+        login = self.client.login(username='testuser', password='testpassword')
+        self.assertTrue(login)
+
+    def test_results_status_code(self):
+        # The results page is only accesible if you're logged in
+        # so we create a log in for this status code to ensure the poge loads
+        self.user = get_user_model().objects.create_user(
+            username='testuser', password='testpassword'
+        )
+        self.client.login(username='testuser', password='testpassword')
+
+        # Reverse the results html page
+        response = self.client.get(reverse('results.index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'results/index.html')
