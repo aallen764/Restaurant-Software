@@ -7,5 +7,6 @@ from django.urls import reverse
 class searchPage(TestCase):
 
     def test_search_status_code(self):
-        response = self.client.get(reverse('search:index'))
+        response = self.client.get(reverse('search.index'))
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content.decode('utf-8'), "search/index.html")

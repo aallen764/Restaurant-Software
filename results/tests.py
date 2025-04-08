@@ -12,5 +12,6 @@ class ResultsTests(TestCase):
         self.client.login(username='testuser', password='testpassword')
 
     def test_results_status_code(self):
-        response = self.client.get(reverse('results:index'))
+        response = self.client.get(reverse('results.index'))
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content.decode('utf-8'), "results/index.html")
