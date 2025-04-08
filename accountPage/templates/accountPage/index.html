@@ -10,9 +10,10 @@
 </div>
 
 <div class="display-5 mb-5 pb-5" style="font-size: 2rem; padding-left: 190px;">
-    <p>Username: {{ user.username }} <button type="button" class="btn btn-dark">Change Username</button></p>
-    <p>Zipcode: 33801 <button type="button" class="btn btn-dark">Change Zipcode</button></p>
-    <p>Email: testemail@gmail.com <button type="button" class="btn btn-dark">Change Email</button></p>
+    <p>Username: {{ user.username }}</p>
+    <p>Zipcode: {{ user.user_profile.zip_code }}</p>
+    <p>Email: {{ user.user_profile.email_address }}</p>
+    <p>Phone Number: {{ user.user_profile.phone_number }}</p>
 </div>
 
 {% endblock content %}
