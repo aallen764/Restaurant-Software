@@ -3,6 +3,8 @@ from signUp.models import user_Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
+from django.contrib.auth import login, authenticate
+
 
 def index(request):
     if request.user.is_authenticated:
@@ -14,7 +16,7 @@ def index(request):
         else:
             return render(request, 'accountPage/index.html', {
                 'template_data': {'title': 'account'},
-                'form': False, # close or DON't show form to change user fields
+                'form': False, # close or DON'T show form to change user fields
             })
     else:
         return redirect('/')
@@ -39,23 +41,20 @@ def update_account(request):
     return redirect('account.index')
 
 def change_password(request):
+    if not request.user.is_authenticated:
+        return redirect('/')
     if request.method == 'POST':
+        user = request.user
         new_password = request.POST.get('new_password')
         confirm_password = request.POST.get('confirm_password')
 
         if new_password != confirm_password:
             request.session['update_messages'] = ["Passwords do not match."]
-            return redirect('account.index')
+            return render(request, 'accountPage/change_password.html')
 
-        request.user.password = make_password(new_password)
+        request.user.set_password(new_password)
         request.user.save()
+        login(request, user)
         request.session['update_messages'] = ["Password updated successfully."]
-        return redirect('account.index')
-
-    return redirect('account.index')
-
-def change_password_page(request):
-    if not request.user.is_authenticated:
-        return redirect('/')
-
+        return render(request, 'accountPage/index.html')
     return render(request, 'accountPage/change_password.html')
