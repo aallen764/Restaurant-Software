@@ -1,49 +1,61 @@
 from django.shortcuts import render, redirect
 from signUp.models import user_Profile
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
+from django.contrib import messages
 
-@login_required
 def index(request):
-    user = request.user
-    profile = user.user_profile
+    if request.user.is_authenticated:
+        if request.GET.get('edit') == 'true':
+            return render(request, 'accountPage/index.html', {
+                'template_data': {'title': 'account'},
+                'form': True,  # show the form to change user fields
+            })
+        else:
+            return render(request, 'accountPage/index.html', {
+                'template_data': {'title': 'account'},
+                'form': False, # close or DON't show form to change user fields
+            })
+    else:
+        return redirect('/')
 
-    if request.method == 'POST':
-        username = request.POST.get('username', user.username)
-        zip_code = request.POST.get('zip_code', profile.zip_code)
-        email_address = request.POST.get('email_address', profile.email_address)
-        phone_number = request.POST.get('phone_number', profile.phone_number)
-
-        user.username = username
-        user.save()
-
-        profile.zip_code = zip_code
-        profile.email_address = email_address
-        profile.phone_number = phone_number
-        profile.save()
-
-        return redirect('account.index') # safe case
-
-    return render(request, 'accountPage/index.html', {
-        'user': user,
-        'user_profile': profile,
-        'template_data': {'title': 'account'}
-    })
-
-@login_required
 def update_account(request):
     if request.method == 'POST':
         user = request.user
         profile = user.user_profile
 
+        # update username (default user field)
         user.username = request.POST.get('username', user.username)
         user.save()
 
+        # update user info with new inputted fields (custom fields)
         profile.zip_code = request.POST.get('zip_code', profile.zip_code)
         profile.email_address = request.POST.get('email_address', profile.email_address)
         profile.phone_number = request.POST.get('phone_number', profile.phone_number)
         profile.save()
 
+        return redirect('account.index') # send back to account page when done editing
+
+    return redirect('account.index')
+
+def change_password(request):
+    if request.method == 'POST':
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+
+        if new_password != confirm_password:
+            request.session['update_messages'] = ["Passwords do not match."]
+            return redirect('account.index')
+
+        request.user.password = make_password(new_password)
+        request.user.save()
+        request.session['update_messages'] = ["Password updated successfully."]
         return redirect('account.index')
-    
-    return redirect('account.index')  #safe case
+
+    return redirect('account.index')
+
+def change_password_page(request):
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    return render(request, 'accountPage/change_password.html')
