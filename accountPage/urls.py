@@ -4,5 +4,5 @@ from .import views
 
 urlpatterns = [
     path('', views.index, name="account.index"),
-    path('help', views.index2, name="account.index2"),
+    path('update/', views.update_account, name="account.update"),
 ]

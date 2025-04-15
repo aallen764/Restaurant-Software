@@ -1,24 +1,49 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from signUp.models import user_Profile
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
-
-# Create your views here.
+@login_required
 def index(request):
-    if request.user.is_authenticated:
-        template_data = {}
-        template_data['title'] = 'account'
-        return render(request, 'accountPage/index.html', {'template_data': template_data})
-    else:
-        return redirect('/')
+    user = request.user
+    profile = user.user_profile
 
-def index2(request):
-    if not request.user.is_authenticated:
-        return redirect('/')
+    if request.method == 'POST':
+        username = request.POST.get('username', user.username)
+        zip_code = request.POST.get('zip_code', profile.zip_code)
+        email_address = request.POST.get('email_address', profile.email_address)
+        phone_number = request.POST.get('phone_number', profile.phone_number)
+
+        user.username = username
+        user.save()
+
+        profile.zip_code = zip_code
+        profile.email_address = email_address
+        profile.phone_number = phone_number
+        profile.save()
+
+        return redirect('account.index') # safe case
+
+    return render(request, 'accountPage/index.html', {
+        'user': user,
+        'user_profile': profile,
+        'template_data': {'title': 'account'}
+    })
+
+@login_required
+def update_account(request):
+    if request.method == 'POST':
+        user = request.user
+        profile = user.user_profile
+
+        user.username = request.POST.get('username', user.username)
+        user.save()
+
+        profile.zip_code = request.POST.get('zip_code', profile.zip_code)
+        profile.email_address = request.POST.get('email_address', profile.email_address)
+        profile.phone_number = request.POST.get('phone_number', profile.phone_number)
+        profile.save()
+
+        return redirect('account.index')
     
-    # call the signup forms for user & profile form to check if new user information is valid (clean)
-    # if input field is EMPTY -> set equal to default value
-    #
-    # change to a ONE-PAGE system - -> add bootstrap image (pencil) next to each user info field
-    # clickable button creates text field and calls signup clean-up forms to check validity
+    return redirect('account.index')  #safe case
