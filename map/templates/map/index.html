@@ -18,11 +18,15 @@
             zoom: 8,
         });
 
-        var marker = new google.maps.Marker({
+        const marker = new google.maps.Marker({
         position: {lat: 28.0421, lng:-81.9535},
         map: map,
         title: "Florida Location"
-    });
+        });
+
+        marker.addListener("click", () =>{
+            alert("Marker clicked")
+        })
     }
 
     
@@ -51,6 +55,9 @@
             <script async src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap"></script>
         </div>
     </div>
+    
+    
+    
 </div>
 
 {% endblock content %}

@@ -5,79 +5,92 @@
     <div class="row no-gutters" style="height: 100h;"> 
       <div class="col-7 d-flex justify-content-center"> 
         <div class="p-3 pt-0 w-75">
-            <form class="d-flex flex-column align-items-center mt-5">
+            <form class="d-flex flex-column align-items-center mt-5" action="{% url 'results.index' %}" method="get">
                 <div class="d-flex w-100 justify-content-center mb-3">
-                    <input class="form-control me-2 w-75" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2 w-75" type="search" placeholder="Search" aria-label="Search" name="query">
                     <button class="btn btn-primary" type="submit">Search</button>
                 </div>
-                <div class="d-flex justify-content-center mb-3"> 
-                    <div class="form-check me-3">
-                        <input type="checkbox" class="form-check-input" id="nearby">
-                        <label class="form-check-label" for="nearby">Nearby</label>
-                    </div>
-                    <div class="form-check me-3">
-                        <input type="checkbox" class="form-check-input" id="open">
-                        <label class="form-check-label" for="open">Open Now</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="Bar">
-                        <label class="form-check-label" for="Bar">Bar</label>
-                    </div>
-                </div>
-            </form>
 
-            <h1 class="display-6 mt-4 justify-content-center d-flex">Best Restaurants Near You</h1>
+            <h1 class="display-6 mt-4 justify-content-center d-flex">What are you looking for?</h1>
 
             <!-- Row for cards -->
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4"> 
-                <!-- First Card -->
-                <div class="col">
-                  <div class="card w-100">
-                        <img src="/static/images/cardPlaceholder.jpg" class="card-img-top" alt="card image" style="width: 100%; height: auto; max-height: 125px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title">Title</h5>
-                            <p class="card-text text-secondary">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
+            <div class="d-flex justify-content-between gap-3 w-100 bg-white m-3 p-5"> 
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="restaurant">
+                    <label class="form-check-label" for="restaurant">Restaurants</label>
                 </div>
-                
-                <!-- Second Card -->
-                <div class="col">
-                  <div class="card w-100">
-                        <img src="/static/images/cardPlaceholder.jpg" class="card-img-top" alt="card image" style="width: 100%; height: auto; max-height: 125px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title">Title</h5>
-                            <p class="card-text text-secondary">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="bar">
+                    <label class="form-check-label" for="bar">Bars</label>
                 </div>
-
-                <!-- Add more cards as needed -->
-                <div class="col">
-                  <div class="card w-100">
-                        <img src="/static/images/cardPlaceholder.jpg" class="card-img-top" alt="card image" style="width: 100%; height: auto; max-height: 125px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title">Title</h5>
-                            <p class="card-text text-secondary">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="cafe">
+                    <label class="form-check-label" for="cafe">Cafes</label>
                 </div>
-
-                <div class="col">
-                  <div class="card w-100">
-                        <img src="/static/images/cardPlaceholder.jpg" class="card-img-top" alt="card image" style="width: 100%; height: auto; max-height: 125px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title">Title</h5>
-                            <p class="card-text text-secondary">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
+
+            <!-- Food Types -->
+            <div class="d-flex justify-content-between gap-3 w-100 bg-white m-3 p-5"> 
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="breakfast">
+                    <label class="form-check-label" for="breakfast">Breakfast</label>
+                </div>
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="linner">
+                    <label class="form-check-label" for="linner">Lunch/Dinner</label>
+                </div>
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="open">
+                    <label class="form-check-label" for="open">Open Now</label>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between gap-3 w-100 bg-white m-3 p-5"> 
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="american">
+                    <label class="form-check-label" for="american">American Food</label>
+                </div>
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="mexican">
+                    <label class="form-check-label" for="mexican">Mexican Food</label>
+                </div>
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="italian">
+                    <label class="form-check-label" for="italian">Italian Food</label>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between gap-3 w-100 bg-white m-3 p-5"> 
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="indian">
+                    <label class="form-check-label" for="indian">Indian Food</label>
+                </div>
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="mediterranean">
+                    <label class="form-check-label" for="mediterranean">Mediterranean Food</label>
+                </div>
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="thai">
+                    <label class="form-check-label" for="thai">Thai Food</label>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between gap-3 w-100 bg-white m-3 p-5"> 
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="chinese">
+                    <label class="form-check-label" for="chinese">Chinese Food</label>
+                </div>
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="japanese">
+                    <label class="form-check-label" for="japanese">Japanese Food</label>
+                </div>
+                <div class="form-check form-check-lg">
+                    <input type="checkbox" class="form-check-input" id="korean">
+                    <label class="form-check-label" for="korean">Korean Food</label>
+                </div>
+            </div>
+
+        </form>
         </div>
       </div>
       <div class="col-5 p-0">

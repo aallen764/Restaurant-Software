@@ -29,5 +29,6 @@ urlpatterns = [
     path('login/', include('login.urls')),
     path('login2/', include('users.urls')),
     path('map/', include('map.urls')),
-    path('account/', include('accountPage.urls'))
+    path('account/', include('accountPage.urls')),
+    path('results/', include('results.urls'))
 ]

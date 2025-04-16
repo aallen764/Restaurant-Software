@@ -23,6 +23,7 @@ class registration_Form(forms.ModelForm):
 class profile_Form(forms.ModelForm):
     zip_code = forms.CharField(max_length = 10, required = True)
     email_address = forms.CharField(max_length = 256, required = True)
+    phone_number = forms.CharField(max_length = 11, required = False)
 
     class Meta:
         model = user_Profile
@@ -37,5 +38,11 @@ class profile_Form(forms.ModelForm):
     def clean_email_address(self): # checks if user's inputted email is valid
         email_address = self.cleaned_data.get('email_address')
         if user_Profile.objects.filter(email_address = email_address).exists():
-            raise forms.ValidationError("this email is already in use. Please choose another or login with email.")
+            raise forms.ValidationError("this email is already in use.")
         return email_address
+    
+    def clean_phone_number(self): # checks if user's inputted phone # is valid (not a duplicate)
+        phone_number = self.cleaned_data.get('phone_number')
+        if user_Profile.objects.filter(phone_number = phone_number).exists():
+            raise forms.ValidationError("This phone number is already in use.")
+        return phone_number

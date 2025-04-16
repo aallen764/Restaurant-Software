@@ -3,8 +3,6 @@ from django.http import HttpResponse
 import requests
 from django.contrib.auth.decorators import login_required
 from signUp.models import user_Profile
-from django.shortcuts import redirect
-
 
 # The index function to handle the search
 @login_required

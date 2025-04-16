@@ -1,12 +1,29 @@
+<<<<<<< HEAD
 .mapholder {
     min-height: 100vh;
     display: flex;
     align-items: stretch;
+=======
+.full-width-container {
+    width: 100vw;  
+    max-width: 100%; 
+    padding: 0 20px; 
 }
 
-#map{
+.mapholder {
+    height: 1000px; 
+    width: 100%;
+>>>>>>> release/feb11
+}
+
+#map {
     height: 100%;
+<<<<<<< HEAD
     width: 100%;
   }
  
   
+=======
+    width: 100%; 
+}
+>>>>>>> release/feb11
