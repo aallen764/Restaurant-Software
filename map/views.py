@@ -9,7 +9,11 @@ class MapView(View):
 
     def get(self, request):
         key = 'AIzaSyAREHr_JNo0KmsVoRgcKSU9t_vqk1mz0No'
+        businesses = request.session.get('businesses', [])
+
         context = { 
-            "key":key
+            "key":key,
+            "businesses": businesses
         }
         return render(request, self.template_name, context)
+

@@ -4,8 +4,14 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 {% load static %}
 <link rel="stylesheet" href="{% static 'styles.css' %}">
+
 <script>
-    
+    const businesses = JSON.parse('{{ businesses|safe|escapejs }}');
+    for (let i= 0; i  < businesses.length; i++){
+        let longitude = businesses[i].longitude;
+        let latitude = businesses[i].latitude;
+    }
+
     function initMap(){
         map = new google.maps.Map(document.getElementById("map"),{
             center:{lat:28.0421 , lng:-81.9535},
@@ -26,9 +32,24 @@
 
 
 <div>
-    <div class="mapholder">
-        <div id="map"></div>
-        <script async src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap"></script>
+    <div class="container-fluid">
+        <div class="mapholder row justify-content-center align-items-center" style="height: 100vh;">
+            <div id="map" class="col-lg-8 col-md-7 col-sm-12"></div>
+    
+            <div class="col-lg-4 col-md-5 col-sm-12 d-flex justify-content-center">
+                {% for business in businesses}
+                <div class="card" style="width: 18rem; border-radius: 10px;">
+                    <img class="card-img-top p-4" src={{ business.img_url }} alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ business.name }}</h5>
+                        <p class="card-text">{{ business.description }}</p>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <script async src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap"></script>
+        </div>
     </div>
 </div>
 
