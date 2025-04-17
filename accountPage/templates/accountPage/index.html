@@ -3,6 +3,15 @@
 {% block content %}
 <div class="container mt-5">
 
+    <!-- Display any messages -->
+    {% if request.session.update_messages %}
+    <div class="alert alert-info">
+        {% for message in request.session.update_messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}  
+    
     <!-- User Info -->
     <div class="d-flex align-items-center">
         <i class="bi bi-person-circle brown" style="font-size: 10rem;"></i>

@@ -8,6 +8,7 @@ from django.contrib.auth import login, authenticate
 
 def index(request):
     if request.user.is_authenticated:
+        #request.session['update_messages'] = ["Password updated successfully."]
         if request.GET.get('edit') == 'true':
             return render(request, 'accountPage/index.html', {
                 'template_data': {'title': 'account'},
@@ -55,6 +56,8 @@ def change_password(request):
         request.user.set_password(new_password)
         request.user.save()
         login(request, user)
+        request.session.pop('update_messages', None)
         request.session['update_messages'] = ["Password updated successfully."]
         return render(request, 'accountPage/index.html')
+    #request.session.pop('update_messages', None)
     return render(request, 'accountPage/change_password.html')
