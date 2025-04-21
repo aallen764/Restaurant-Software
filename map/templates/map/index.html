@@ -4,51 +4,123 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 {% load static %}
 <link rel="stylesheet" href="{% static 'styles.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
 <script>
-    
-    function initMap(){
-        map = new google.maps.Map(document.getElementById("map"),{
-            center:{lat:28.0421 , lng:-81.9535},
-            zoom: 8,
+    let map;
+    async function initMap() {
+ 
+        businesses = JSON.parse("{{businesses|escapejs}}");
+        console.log(businesses);
+
+        let totalLat = 0;
+        let totalLng = 0;
+
+        for (let i = 0; i < businesses.length; i++) {
+            totalLat += parseFloat(businesses[i].coordinates.latitude);
+            totalLng += parseFloat(businesses[i].coordinates.longitude);
+        }
+
+        let avgLat = totalLat / businesses.length;
+        let avgLng = totalLng / businesses.length;
+
+
+
+        const { Map } = await google.maps.importLibrary("maps");
+        map = new Map(document.getElementById("map"), {
+            center: { lat: avgLat, lng: avgLng },
+            zoom: 10,
         });
 
-        const marker = new google.maps.Marker({
-        position: {lat: 28.0421, lng:-81.9535},
-        map: map,
-        title: "Florida Location"
-        });
+        for (let i= 0; i  < businesses.length; i++) {
+            let longitude = parseFloat(businesses[i].coordinates.longitude);
+            let latitude = parseFloat(businesses[i].coordinates.latitude);
+  
+            const marker = new google.maps.Marker({
+                position: {
+                    lat: latitude, 
+                    lng: longitude
+                },
+                map: map,
+                title: businesses[i].name
+            });
 
-        marker.addListener("click", () =>{
-            alert("Marker clicked")
-        })
+            marker.addListener("click", () => {
+                let card = document.querySelector('.card');
+                let image = card.querySelector('img');
+                
+                let cardBody = document.querySelector('.card-body');
+                let title = cardBody.querySelector('h5');
+                let phone = cardBody.querySelector('.card-text1')
+
+                image.src = businesses[i].image_url;
+                title.innerText = businesses[i].name;
+                
+
+                let starContainer = cardBody.querySelector('.star-rating');
+                let rating = parseFloat(businesses[i].rating);
+
+                starContainer.innerHTML = '';
+
+                for (let i = 1; i <= 5; i++) {
+                    let star = document.createElement('i');
+
+                    if (i <= Math.floor(rating)) {
+                        star.className = 'bi bi-star-fill text-warning';
+                    } else if (i - rating < 1) {
+                        star.className = 'bi bi-star-half text-warning';
+                    } else {
+                        star.className = 'bi bi-star text-warning';
+                    }
+
+                    star.style.fontSize = '1.25rem'; 
+                    star.style.marginRight = '2px';  
+                    starContainer.appendChild(star);
+                }
+
+                let ratingText = document.createElement('span');
+                ratingText.innerText = rating.toFixed(1); 
+                ratingText.style.marginLeft = '6px';
+                ratingText.style.color = '#333';
+
+                starContainer.appendChild(ratingText);
+
+            });
+        }
+
     }
 
-    
-    window.initMap = initMap;
+
 </script>
 
 
 
 <div>
     <div class="container-fluid">
-        <div class="mapholder row justify-content-center align-items-center" style="height: 100vh;">
-            <div id="map" class="col-lg-8 col-md-7 col-sm-12"></div>
-    
-            <div class="col-lg-4 col-md-5 col-sm-12 d-flex justify-content-center">
-                <div class="card" style="width: 18rem; border-radius: 10px;">
-                    <img class="card-img-top p-4" src="https://i.pinimg.com/736x/17/60/af/1760afc8834d516147ee58941437b15d.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    
-                </div>
+        <div class="row" style="height: 100vh;">
+            <!--MAP-->
+            <div class="mapholder col-lg-8 col-md-7 col-sm-12" style="height: 100vh;">
+                <div id="map"></div>
             </div>
+
+            <!--CARD-->
+            <div class="col-lg-4 col-md-5 col-sm-12 d-flex justify-content-center align-items-center">
+                <div class="card" style="width: 18rem; border-radius: 10px;">
+                    <img class="card-img-top pt-4 px-4" src='empty' alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ business.name }}</h5>
+
+                        <div class="star-rating"></div>
+
+                    </div>
+                </div>
+                <!-- <p>Business count: {{ businesses|length }}</p> -->
+            </div>
+
+            <script async src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap&loading=async"></script>
         </div>
     </div>
-    
-    <script async src="https://maps.googleapis.com/maps/api/js?key={{key}}&callback=initMap"></script>
-    
+    </div>
     
 </div>
 
