@@ -1,18 +1,75 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container mt-5">
 
-<div class="m-3 mb-0 pb-0">
+    <!-- User Info -->
     <div class="d-flex align-items-center">
         <i class="bi bi-person-circle brown" style="font-size: 10rem;"></i>
         <span style="font-size: 3rem; margin-left: 10px;" class="display-4">Welcome, {{ user.username }}</span>
     </div>
-</div>
 
-<div class="display-5 mb-5 pb-5" style="font-size: 2rem; padding-left: 190px;">
-    <p>Username: {{ user.username }} <button type="button" class="btn btn-dark">Change Username</button></p>
-    <p>Zipcode: 33801 <button type="button" class="btn btn-dark">Change Zipcode</button></p>
-    <p>Email: testemail@gmail.com <button type="button" class="btn btn-dark">Change Email</button></p>
-</div>
+    <div class="display-5 mb-5 pb-5" style="font-size: 2rem;">
+        {% if form %}
+            <!-- Form for Updating Account Information -->
+            <form method="POST" action="{% url 'account.update' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">New Username</label>
+                    <input type="text" name="username" class="form-control" value="{{ user.username }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="zip_code">New Zip Code</label>
+                    <input type="text" name="zip_code" class="form-control" value="{{ user.user_profile.zip_code }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="email_address">New Email Address</label>
+                    <input type="email" name="email_address" class="form-control" value="{{ user.user_profile.email_address }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone_number">New Phone Number</label>
+                    <input type="text" name="phone_number" class="form-control" value="{{ user.user_profile.phone_number }}" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Account Information</button>
+            </form>
+        {% else %}
+            <!-- Display Account Information -->
+            <p>Username: {{ user.username }}</p>
+            <p>Zipcode: {{ user.user_profile.zip_code }}</p>
+            <p>Email: {{ user.user_profile.email_address }}</p>
+            <p>Phone Number: {{ user.user_profile.phone_number }}</p>
+        {% endif %}
+    </div>
 
-{% endblock content %}
+    <!-- Change Account Info Button -->
+    <div class="d-flex w-100 justify-content-center mb-3">
+        <a href="{% url 'account.index' %}?edit=true" class="btn btn-primary">Change Account Information</a>
+    </div>
+
+    <!-- Change Password Button -->
+    <div class="d-flex w-100 justify-content-center mb-3">
+        <a href="{% url 'account.password_submit' %}" class="btn btn-warning">Change Password</a>
+    </div>
+
+    <!-- Display any messages -->
+    {% if update_messages %}
+    <div class="alert alert-info">
+        {% for message in update_messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Target the form control inside the container for more specificity */
+    .container .form-control {
+        max-width: 500px; /* Adjust the width to your preference */
+        margin: 10px auto; /* Centers the input fields */
+        display: block;
+    }
+</style>
+{% endblock %}
