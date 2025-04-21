@@ -1,29 +1,14 @@
-<<<<<<< HEAD
 .mapholder {
-    min-height: 100vh;
-    display: flex;
-    align-items: stretch;
-=======
-.full-width-container {
-    width: 100vw;  
-    max-width: 100%; 
-    padding: 0 20px; 
-}
-
-.mapholder {
-    height: 1000px; 
-    width: 100%;
->>>>>>> release/feb11
+    height: 100vh;
 }
 
 #map {
     height: 100%;
-<<<<<<< HEAD
     width: 100%;
-  }
- 
-  
-=======
-    width: 100%; 
+    min-height: 500px;
 }
->>>>>>> release/feb11
+
+.card {
+    max-height: 90vh;
+    overflow-y: auto;
+}

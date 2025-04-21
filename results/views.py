@@ -82,7 +82,7 @@ def get_city_from_zip(zip_code):
 
 # Function to search restaurants using Yelp API based on city and query
 def findRestaurants(city, query, restaurant, bar, cafe, breakfast, linner, open, american, mexican, italian, indian, mediterranean, thai, chinese, japanese, korean):
-    API_KEY = '8IsAViZ9EV4sgczPyama_sNAMtRagiWIQk1nU6QdQA6QJ5iR3L9Exd-fBXkOKVQHQW93gySAvGrNyzTBz0C7UA0lX1Z__z_PLLkVug3hb2vSrH4VguGtHhC9T1HTZ3Yx'
+    API_KEY = 'piS4m_Ca8bofHeT2Sqdi6OXCLMXTSMvke3HciINSKNCur9GbnUD0P7pB4TN0Qtp4aJ0KA7X45Dw5HA1lJM6SCdJ0t8cHrN5nv0AJT5Gp_O-JgrEn1Bgx7Btq7DwBaHYx'
     HEADERS = {'Authorization': f'Bearer {API_KEY}'}
     url = 'https://api.yelp.com/v3/businesses/search'
 

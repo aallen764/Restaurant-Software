@@ -4,6 +4,7 @@ from django.views import View
 from results.views import findRestaurants
 from results.views import get_city_from_zip
 import requests
+from json import dumps
 
 
 # Create your views here.
@@ -14,9 +15,10 @@ class MapView(View):
         key = 'AIzaSyAREHr_JNo0KmsVoRgcKSU9t_vqk1mz0No'
         businesses = request.session.get('businesses', [])
 
+        businessesJson = dumps(businesses)
         context = { 
             "key":key,
-            "businesses": businesses
+            "businesses": businessesJson
         }
         return render(request, self.template_name, context)
 
