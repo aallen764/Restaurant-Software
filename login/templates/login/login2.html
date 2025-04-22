@@ -22,6 +22,14 @@
         </div>
     </section>
 
+    {% if messages %}
+    <div class="alert alert-info">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <div class="d-flex flex-column justify-content-center align-items-center">
         <div class="card d-flex flex-column justify-content-center" style="width: 30rem; height: 40rem">
             <h5 class="card-title mx-3 mt-5 mb-1">SIGN IN</h5>

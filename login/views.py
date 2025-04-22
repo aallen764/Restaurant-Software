@@ -29,10 +29,10 @@ def user_Login(request):
         
         if user is not None:
             auth_login(request, user)
-            messages.success(request, "LOGIN WAS SUCCESSFUL")
             return redirect('/') # redirect to homepage after successfully logging in
         else:
             messages.error(request, "Invalid username or password.")
+            return render(request, 'login/login2.html')
     
     return redirect('/') # redirect to homepage if successfully logged in
 
@@ -41,10 +41,4 @@ def logout_view(request):
         logout(request)
         return redirect('/') # redirect to homepage after signing out
     else: # if not logged in, they can't logout so return to homepage
-        return redirect('/')
-
-def test(request):
-    if request.user.is_authenticated:
-        return HttpResponse("THIS IS THE ACCOUNT PAGE!")
-    else:
         return redirect('/')

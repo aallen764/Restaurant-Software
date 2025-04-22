@@ -18,6 +18,9 @@ class registration_Form(forms.ModelForm):
         username = self.cleaned_data.get('username')
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError("This username is already taken. Please choose another.") # outputs error if inputted username already exists
+        if User.objects.filter(username=""):
+            raise forms.ValidationError("Please fill out this field.")
+        print(username)
         return username
 
 class profile_Form(forms.ModelForm):
@@ -33,6 +36,8 @@ class profile_Form(forms.ModelForm):
         zip_code = self.cleaned_data.get('zip_code')
         if not re.fullmatch(r'\d{5,10}', zip_code): # makes sure zipcode is at least 5 digits long, shorter than 10
             raise forms.ValidationError("Must be atleast 5 digits long (numbers only).")
+        if len(zip_code) == 1:
+            raise forms.ValidationError("ERROR")
         return zip_code
         
     def clean_email_address(self): # checks if user's inputted email is valid
