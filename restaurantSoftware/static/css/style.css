@@ -180,3 +180,23 @@ input.form-control {
 .dark-brown {
     color:#5f3d24;
 }
+
+/* New improved search page styling */
+.bg-search {
+    background: url("/static/images/searchPageBG.jpg") no-repeat fixed;
+    background-size: cover;
+    background-position: center;
+    height: 100;
+    width: 100%;
+    color: white;
+}
+
+.overlay-box {
+    background-color: rgba(0, 0, 0, 0.6);  /* Transparent black */
+    padding: 2rem;
+    border-radius: 1rem;
+    color: white;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
