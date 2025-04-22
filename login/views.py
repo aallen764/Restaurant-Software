@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib.auth import logout
 from django.contrib import messages
+from django.contrib.messages import get_messages
 from django.views import generic
 from django.template import loader
-import time
 
 # Create your views here.
 def login_view(request):
@@ -16,6 +16,10 @@ def login_view(request):
         else:
             template_data = {}
             template_data['title'] = 'BiteFinder'
+            
+            if 'error_message' in request.session:
+                del request.session['error_message']
+                
             return render(request, 'login/login2.html', {'template_data': template_data})
     else: # if user IS logged in, redirect back to homepage (they shouldn't be able to access this page)
         return(redirect('/'))
@@ -31,7 +35,7 @@ def user_Login(request):
             auth_login(request, user)
             return redirect('/') # redirect to homepage after successfully logging in
         else:
-            messages.error(request, "Invalid username or password.")
+            request.session['error_message'] = "Invalid username or password."
             return render(request, 'login/login2.html')
     
     return redirect('/') # redirect to homepage if successfully logged in
