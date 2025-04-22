@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 
+
+#Yelp API KEY
+
+YELP_API_KEY = "yo5Q5F8vWpNC1D2IXqGw8ArpJ2F-Sxckge9X1mvMDU0KYsAnm9PA_lRulwpA8Yz_sJkr7oCRjgjf5vuZOa29lK3HgeP5u9EhXf8fCdqW9phcuLqn6e5K1qmGTKUh6QZ3Yx"
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
