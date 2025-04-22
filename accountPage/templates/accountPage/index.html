@@ -3,24 +3,26 @@
 {% block content %}
 <div class="container mt-5">
 
-    <!-- Display any messages -->
-    {% if request.session.update_messages %}
-    <div class="alert alert-info">
-        {% for message in request.session.update_messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    </div>
-    {% endif %}  
-    
+    <!-- Display messages at the top of the page -->
+    {% if update_messages %}
+        <div class="alert alert-info">
+            {% for message in update_messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <!-- User Info -->
     <div class="d-flex align-items-center">
         <i class="bi bi-person-circle brown" style="font-size: 10rem;"></i>
-        <span style="font-size: 3rem; margin-left: 10px;" class="display-4">Welcome, {{ user.username }}</span>
+        <span style="font-size: 3rem; margin-left: 10px;" class="display-4">
+            Welcome, {{ user.username }}
+        </span>
     </div>
 
     <div class="display-5 mb-5 pb-5" style="font-size: 2rem;">
         {% if form %}
-            <!-- Form for Updating Account Information -->
+            <!-- Display form for editing user info -->
             <form method="POST" action="{% url 'account.update' %}">
                 {% csrf_token %}
                 <div class="form-group">
@@ -42,7 +44,7 @@
                 <button type="submit" class="btn btn-primary">Update Account Information</button>
             </form>
         {% else %}
-            <!-- Display Account Information -->
+            <!-- Display user's info -->
             <p>Username: {{ user.username }}</p>
             <p>Zipcode: {{ user.user_profile.zip_code }}</p>
             <p>Email: {{ user.user_profile.email_address }}</p>
@@ -60,24 +62,14 @@
         <a href="{% url 'account.password_submit' %}" class="btn btn-warning">Change Password</a>
     </div>
 
-    <!-- Display any messages -->
-    {% if update_messages %}
-    <div class="alert alert-info">
-        {% for message in update_messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    </div>
-    {% endif %}
-
 </div>
 {% endblock %}
 
 {% block extra_css %}
 <style>
-    /* Target the form control inside the container for more specificity */
     .container .form-control {
-        max-width: 500px; /* Adjust the width to your preference */
-        margin: 10px auto; /* Centers the input fields */
+        max-width: 500px;
+        margin: 10px auto;
         display: block;
     }
 </style>

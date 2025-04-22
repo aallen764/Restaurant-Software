@@ -7,9 +7,9 @@ from django.dispatch import receiver
 # Create your models here.
 class user_Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) # Connects one unique profile with its unique user - if one is deleted so is the other
-    email_address = models.CharField(max_length=256, blank=True, null=True) # Additional fields added to user continued below
+    email_address = models.CharField(max_length=256, blank=True, null=True, unique=True) # Additional fields added to user continued below
     zip_code = models.CharField(max_length=10) # REQUIRED FIELD***
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    phone_number = models.CharField(max_length=15, blank=True, null=True, unique=True)
 
     def __str__(self):
         return self.user.username
