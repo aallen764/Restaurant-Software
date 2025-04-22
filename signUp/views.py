@@ -34,6 +34,12 @@ def signUp(request):
 
             login(request, user)
             return redirect("/")
+        else:
+            # Return the forms with errors and previously entered data back to the template
+            return render(request, 'signUp/register2.html', {
+                'user_form': user_form,
+                'profile_form': profile_form
+            })
 
     return render(request, 'signUp/register2.html', {
         "user_form": user_form, 

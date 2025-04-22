@@ -16,11 +16,12 @@ class registration_Form(forms.ModelForm):
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
-        if User.objects.filter(username=username).exists():
-            raise forms.ValidationError("This username is already taken. Please choose another.") # outputs error if inputted username already exists
-        if User.objects.filter(username=""):
+        # if no username is entered
+        if not username:
             raise forms.ValidationError("Please fill out this field.")
-        print(username)
+        # if username already exists
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError("This username is already taken. Please choose another.")
         return username
 
 class profile_Form(forms.ModelForm):
@@ -34,20 +35,26 @@ class profile_Form(forms.ModelForm):
 
     def clean_zip_code(self): # checks if zip_code is valid
         zip_code = self.cleaned_data.get('zip_code')
-        if not re.fullmatch(r'\d{5,10}', zip_code): # makes sure zipcode is at least 5 digits long, shorter than 10
+        # if no zipcode is entered
+        if not zip_code:
+            raise forms.ValidationError("Please fill out this field.")
+        # if zipcode isn't between 5 & 10 digits
+        if not re.fullmatch(r'\d{5,10}', zip_code):
             raise forms.ValidationError("Must be atleast 5 digits long (numbers only).")
-        if len(zip_code) == 1:
-            raise forms.ValidationError("ERROR")
         return zip_code
         
     def clean_email_address(self): # checks if user's inputted email is valid
         email_address = self.cleaned_data.get('email_address')
-        if user_Profile.objects.filter(email_address = email_address).exists():
-            raise forms.ValidationError("this email is already in use.")
+        if email_address:
+            # if entered email already exists
+            if user_Profile.objects.filter(email_address = email_address).exists():
+                raise forms.ValidationError("this email is already in use.")
         return email_address
     
     def clean_phone_number(self): # checks if user's inputted phone # is valid (not a duplicate)
         phone_number = self.cleaned_data.get('phone_number')
-        if user_Profile.objects.filter(phone_number = phone_number).exists():
-            raise forms.ValidationError("This phone number is already in use.")
+        if phone_number:
+            # if entered phone number is already in use
+            if user_Profile.objects.filter(phone_number = phone_number).exists():
+                raise forms.ValidationError("This phone number is already in use.")
         return phone_number
