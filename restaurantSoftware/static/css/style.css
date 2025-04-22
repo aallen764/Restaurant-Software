@@ -42,7 +42,7 @@ body{
 
 /* Home page styling */
 div .bg-index{
-    background: url("/static/images/homebg.jpeg") no-repeat fixed;
+    background: url("/static/images/homeBG.jpg") no-repeat fixed;
     background-size: cover;      
     background-position: center; 
     background-repeat: no-repeat; 
@@ -53,6 +53,18 @@ div .bg-index{
     align-items: center;
     color: white;
     z-index: -1;
+  }
+
+  .home-text {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 3rem;
+    border-radius: 2rem;
+    padding: 2rem;
+  }
+
+  .home-text:hover{
+    background-color: #5f3d24;
   }
 
   .btn-primary {
@@ -68,7 +80,8 @@ div .bg-index{
 
   /* this is for the about page */
   .aboutImage {
-    object-fit: cover
+    object-fit: cover;
+    border: 5px solid #7F5739;
   }
   /* This is for my search page */
   .searchImg {
