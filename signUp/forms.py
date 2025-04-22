@@ -18,10 +18,10 @@ class registration_Form(forms.ModelForm):
         username = self.cleaned_data.get('username')
         # if no username is entered
         if not username:
-            raise forms.ValidationError("Please fill out this field.")
+            self.add_error("username", "Please fill out this field.")
         # if username already exists
         if User.objects.filter(username=username).exists():
-            raise forms.ValidationError("This username is already taken. Please choose another.")
+            self.add_error("username", "This username is already in use.")
         return username
 
 class profile_Form(forms.ModelForm):
@@ -37,10 +37,10 @@ class profile_Form(forms.ModelForm):
         zip_code = self.cleaned_data.get('zip_code')
         # if no zipcode is entered
         if not zip_code:
-            raise forms.ValidationError("Please fill out this field.")
+            self.add_error("zip_code", "Please fill out this field.")
         # if zipcode isn't between 5 & 10 digits
         if not re.fullmatch(r'\d{5,10}', zip_code):
-            raise forms.ValidationError("Must be atleast 5 digits long (numbers only).")
+            self.add_error("zip_code", "Must be between 5 and 10 digits long.")
         return zip_code
         
     def clean_email_address(self): # checks if user's inputted email is valid
@@ -48,7 +48,7 @@ class profile_Form(forms.ModelForm):
         if email_address:
             # if entered email already exists
             if user_Profile.objects.filter(email_address = email_address).exists():
-                raise forms.ValidationError("this email is already in use.")
+                self.add_error("email_address", "this email is already in use.")
         return email_address
     
     def clean_phone_number(self): # checks if user's inputted phone # is valid (not a duplicate)
@@ -56,5 +56,7 @@ class profile_Form(forms.ModelForm):
         if phone_number:
             # if entered phone number is already in use
             if user_Profile.objects.filter(phone_number = phone_number).exists():
-                raise forms.ValidationError("This phone number is already in use.")
+                self.add_error("phone_number", "This phone number is already in use.")
+            if not re.fullmatch(r'\d{10,12}', phone_number):
+                self.add_error("phone_number", "Must be between 10 and 12 digits long.")
         return phone_number
