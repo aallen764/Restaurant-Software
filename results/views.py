@@ -46,7 +46,6 @@ def index(request):
 
     # Find restaurants based on the city and search query (if provided)
     businesses = findRestaurants(city, query, restaurant, bar, cafe, breakfast, linner, open, american, mexican, italian, indian, mediterranean, thai, chinese, japanese, korean)  # Pass the search query to findRestaurants
-    print(businesses)
     
     # Send api response to the send_view function 
     send_view(request, businesses)
