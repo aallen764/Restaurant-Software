@@ -6,7 +6,7 @@ from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.messages import get_messages
 from django.views import generic
-from django.template import loader
+from .forms import login_Form
 
 # Create your views here.
 def login_view(request):
@@ -26,19 +26,20 @@ def login_view(request):
     
 def user_Login(request):
     if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
+        error_profile = login_Form(request.POST)
+        if error_profile.is_valid():
+            username = error_profile.cleaned_data["username"]
+            password = error_profile.cleaned_data["password"]
+            
+            user = authenticate(request, username=username, password=password)
         
-        user = authenticate(request, username=username, password=password)
-        
-        if user is not None:
-            auth_login(request, user)
-            return redirect('/') # redirect to homepage after successfully logging in
-        else:
-            request.session['error_message'] = "Invalid username or password."
-            return render(request, 'login/login2.html')
+            if user is not None:
+                auth_login(request, user)
+                return redirect('/') # redirect to homepage after successfully logging in
+    else:
+        error_profile = login_Form()
     
-    return redirect('/') # redirect to homepage if successfully logged in
+    return render(request, 'login/login2.html', {'error_profile': error_profile})
 
 def logout_view(request):
     if request.user.is_authenticated: # if user is logged in, allow them to log out

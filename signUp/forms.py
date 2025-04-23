@@ -59,4 +59,6 @@ class profile_Form(forms.ModelForm):
                 self.add_error("phone_number", "This phone number is already in use.")
             if not re.fullmatch(r'\d{10,12}', phone_number):
                 self.add_error("phone_number", "Must be between 10 and 12 digits long.")
+        else:
+            return None
         return phone_number
