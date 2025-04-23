@@ -14,13 +14,11 @@ from pathlib import Path
 import os
 
 
-#Yelp API KEY
-
+# Yelp API KEY
 YELP_API_KEY = "yo5Q5F8vWpNC1D2IXqGw8ArpJ2F-Sxckge9X1mvMDU0KYsAnm9PA_lRulwpA8Yz_sJkr7oCRjgjf5vuZOa29lK3HgeP5u9EhXf8fCdqW9phcuLqn6e5K1qmGTKUh6QZ3Yx"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -33,9 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -85,10 +81,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'restaurantSoftware.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -96,10 +90,8 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -115,10 +107,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
-
 GOOGLE_API_KEY = 'AIzaSyAREHr_JNo0KmsVoRgcKSU9t_vqk1mz0No'
 
 LANGUAGE_CODE = 'en-us'
@@ -129,10 +119,8 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
@@ -141,9 +129,11 @@ STATICFILES_DIRS = [
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Media (for uploaded files like profile pictures)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Redirect After Logout
+LOGOUT_REDIRECT_URL = '/'
