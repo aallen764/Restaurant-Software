@@ -10,6 +10,8 @@ class user_Profile(models.Model):
     email_address = models.CharField(max_length=256, blank=True, null=True) # Additional fields added to user continued below
     zip_code = models.CharField(max_length=10) # REQUIRED FIELD***
     phone_number = models.CharField(max_length=15, blank=True, null=True)
+    
+    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 
     def __str__(self):
         return self.user.username

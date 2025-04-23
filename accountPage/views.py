@@ -5,44 +5,47 @@ from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 
+# ✅ NEW import for handling the form
+from .forms import ProfileUpdateForm
+
 
 def index(request):
     if request.user.is_authenticated:
         if request.GET.get('edit') == 'true':
             return render(request, 'accountPage/index.html', {
                 'template_data': {'title': 'account'},
-                'form': True,  # show the form to change user fields
+                'form': True,
             })
         else:
             return render(request, 'accountPage/index.html', {
                 'template_data': {'title': 'account'},
-                'form': False, # close or DON'T show form to change user fields
+                'form': False,
             })
     else:
         return redirect('/')
+
 
 def update_account(request):
     if request.method == 'POST':
         user = request.user
         profile = user.user_profile
 
-        # update username (default user field)
-        user.username = request.POST.get('username', user.username)
-        user.save()
-
-        # update user info with new inputted fields (custom fields)
-        profile.zip_code = request.POST.get('zip_code', profile.zip_code)
-        profile.email_address = request.POST.get('email_address', profile.email_address)
-        profile.phone_number = request.POST.get('phone_number', profile.phone_number)
-        profile.save()
-
-        return redirect('account.index') # send back to account page when done editing
+        # ✅ Use the ModelForm to update both text fields and the profile picture
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            # Update username separately since it's on the User model
+            user.username = request.POST.get('username', user.username)
+            user.save()
+            form.save()
+        return redirect('account.index')
 
     return redirect('account.index')
+
 
 def change_password(request):
     if not request.user.is_authenticated:
         return redirect('/')
+        
     if request.method == 'POST':
         user = request.user
         new_password = request.POST.get('new_password')
@@ -52,9 +55,10 @@ def change_password(request):
             request.session['update_messages'] = ["Passwords do not match."]
             return render(request, 'accountPage/change_password.html')
 
-        request.user.set_password(new_password)
-        request.user.save()
+        user.set_password(new_password)
+        user.save()
         login(request, user)
         request.session['update_messages'] = ["Password updated successfully."]
         return render(request, 'accountPage/index.html')
+
     return render(request, 'accountPage/change_password.html')
