@@ -3,6 +3,7 @@
 {% block content %}
 <div class="container mt-5">
 
+<<<<<<< HEAD
     <!-- Profile Picture Preview -->
     <div class="d-flex align-items-center mb-4">
         {% if user.user_profile.profile_picture %}
@@ -13,12 +14,34 @@
                  style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
         {% endif %}
         <span style="font-size: 3rem; margin-left: 10px;" class="display-4">Welcome, {{ user.username }}</span>
+=======
+    <!-- Display messages at the top of the page -->
+    {% if update_messages %}
+        <div class="alert alert-info">
+            {% for message in update_messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- User Info -->
+    <div class="d-flex align-items-center">
+        <i class="bi bi-person-circle brown" style="font-size: 10rem;"></i>
+        <span style="font-size: 3rem; margin-left: 10px;" class="display-4">
+            Welcome, {{ user.username }}
+        </span>
+>>>>>>> feature/accountPage
     </div>
 
     <div class="display-5 mb-5 pb-5" style="font-size: 2rem;">
         {% if form %}
+<<<<<<< HEAD
             <!-- Form for Updating Account Information -->
             <form method="POST" action="{% url 'account.update' %}" enctype="multipart/form-data">
+=======
+            <!-- Display form for editing user info -->
+            <form method="POST" action="{% url 'account.update' %}">
+>>>>>>> feature/accountPage
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="username">New Username</label>
@@ -43,7 +66,11 @@
                 <button type="submit" class="btn btn-primary">Update Account Information</button>
             </form>
         {% else %}
+<<<<<<< HEAD
             <!-- Read-only Account Info -->
+=======
+            <!-- Display user's info -->
+>>>>>>> feature/accountPage
             <p>Username: {{ user.username }}</p>
             <p>Zip Code: {{ user.user_profile.zip_code }}</p>
             <p>Email: {{ user.user_profile.email_address }}</p>
@@ -61,6 +88,7 @@
         <a href="{% url 'account.password_submit' %}" class="btn btn-warning">Change Password</a>
     </div>
 
+<<<<<<< HEAD
     {% if update_messages %}
     <div class="alert alert-info">
         {% for message in update_messages %}
@@ -71,3 +99,17 @@
 
 </div>
 {% endblock %}
+=======
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .container .form-control {
+        max-width: 500px;
+        margin: 10px auto;
+        display: block;
+    }
+</style>
+{% endblock %}
+>>>>>>> feature/accountPage
